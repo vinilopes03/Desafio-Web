@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CEFIS - CURSOS</title>
+
+	<script src="jq/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="imgG.css">
+
+	<script>
+
+		//Realiza a requisição do JSON ao endpoint
+		$.get("https://cefis.com.br/api/v1/event", "", function(){ console.log("Sucesso durante a requisição")}, "html").done(function (dados) {
+
+			var jObject = JSON.parse(dados);
+			jObject.data.forEach(function(jObject) { conteudo(jObject); })})
+
+			.fail(function(jqXHR, textStatus ) {
+			    console.log("Falha durante a requisição");
+			
+			}).always(function() {
+			    console.log("Requisição completa");
+			});
+			
+			//Cria o conteudo de cada curso em um card
+			function conteudo(curso){
+					$('#curso').append('<div class="col-lg-3 col-md-4 col-sm-6"><div class="card mb-4"> <a href="curso.html?'+curso.id+'='+curso.id+'"> <h7 class="head" >'+ curso.title +'</h7> <img class="img-thumbnail" src="' + curso.banner + '" alt="Banner do curso"> </div> </div>');
+			}
+	</script>
+
+
+</head>
+
+<body>
+	<!-- cria a  navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" >
+		<div class="container">
+		  <img src="https://cdn.cefis.com.br/assets/images/site/svg/logo-cefis.svg" class="navbar-brand">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  	<span class="navbar-toggler-icon"></span>
+		  </button>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="jumbotron">
+			<p>Cursos</p> <i class="icon-cart"></i>
+		</div>
+	</div>
+
+	<!-- recebe as informações de cada curso e exibe-->
+	<div class="container">
+		<div class="row center" id="curso">
+	</div>
+
+
+
+</body>
+</html>
