@@ -17,8 +17,7 @@
 			    data = chaveValor[0];
 			})
 			var id = parseInt(data);
-			console.log(id);
-
+		
 		// Onde é realizado a busca do curso com o ID obtido pela URL
 			$.get("https://cefis.com.br/api/v1/event/"+id+"?include=classes", "", function(){ console.log("Sucesso durante a requisição")}, "html")
 
